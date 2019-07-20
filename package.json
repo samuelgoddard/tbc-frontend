@@ -1,0 +1,26 @@
+{
+  "name": "tbc-frontend",
+  "version": "1.0.0",
+  "description": "My well-made Nuxt.js project",
+  "author": "Sam Goddard",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.6.4",
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "postcss-import": "^12.0.1",
+    "postcss-import-resolver": "^1.2.3",
+    "postcss-nested": "^4.1.2",
+    "tailwindcss": "^1.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+/* Global Font Face */
+@import "assets/css/_fonts.css";
+
+/* Tailwind Base */
+@import "tailwindcss/base.css";
+@import "tailwindcss/components.css";
+
+/* Atoms */
+@import 'assets/css/_container.css';
+@import 'assets/css/_headings.css';
+@import 'assets/css/_link.css';
+@import 'assets/css/_paragraph.css';
+@import 'assets/css/_meta.css';
+
+/* Utilities */
+@import "tailwindcss/utilities.css";
