@@ -30,7 +30,8 @@ export default {
     }
   },
   purgeCSS: {
-    mode: 'postcss'
+    mode: 'postcss',
+    whitelist: ['nuxt-link-exact-active', 'fade-enter-active', 'fade-leave-active', 'fade-enter', '.fade-leave-to']
   },
   lozad: {
   },
