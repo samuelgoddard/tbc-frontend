@@ -1,6 +1,6 @@
 <template>
   <div class="m-teaser pb-3 sm:pb-6 lg:pb-12">
-    <nuxt-link to="#" class="no-underline">
+    <nuxt-link to="#" class="no-underline" aria-label="Navigate to article">
       <lazy-image :src="imgUrl" alt="Placeholder Image" class="mb-5 w-full" />
     </nuxt-link>
     
