@@ -1,6 +1,9 @@
 require('dotenv').config()
 
 export default {
+  env: {
+    DATO_KEY: process.env.process.env.DATO_KEY,
+  },
   mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
