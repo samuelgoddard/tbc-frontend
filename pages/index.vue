@@ -3,7 +3,7 @@
     <!-- Hero -->
     <div class="mb-12 md:mb-32 xl:mb-40">
       <div class="container">
-        <Hero />
+        <Hero :heroTitle="home.heroTitle" :heroBlurb="home.heroBlurb" :heroImage="home.heroImage.url"/>
       </div>
     </div>
     <!-- End Hero -->
@@ -53,17 +53,17 @@
     <!-- End Style Edit -->
 
     <!-- Meet the curator -->
-    <div class="mb-12 md:mb-32 xl:mb-40">
+    <div class="mb-12 md:mb-32 xl:mb-40" v-for="curator in allCurators" :key="curator.id">
       <div class="container">
         <div class="w-full md:w-11/12 lg:w-9/12 mx-auto">
           <div class="flex flex-wrap md:-mx-8 items-center">
             <div class="w-full md:w-3/5 md:px-8 mb-6 md:mb-0">
-              <lazy-image classList="border-l-12 border-pink w-full" />
+              <lazy-image :src="curator.image.url" :alt="curator.image.alt" classList="border-l-12 border-pink w-full" />
             </div>
             
             <div class="w-full md:w-2/5 md:px-8">
               <h2 class="font-serif text-2xl">meet the curator.</h2>
-              <p class="text-sm mb-4 lg:pr-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quasi alias nobis impedit veritatis. Voluptate quis nisi aliquam, sunt ullam totam omnis ex distinctio.</p>
+              <p class="text-sm mb-4 lg:pr-12">{{ curator.blurb }}</p>
               <nuxt-link to="#" class="underline">learn more</nuxt-link>
             </div>
           </div>
@@ -105,12 +105,43 @@ import Hero from '~/components/Hero.vue'
 import Teaser from '~/components/Teaser.vue'
 import LazyImage from '~/components/LazyImage.vue'
 
+import gql from 'graphql-tag';
+
 export default {
   transition: 'fade',
   components: {
     Hero,
     Teaser,
     LazyImage,
+  },
+  apollo: {
+    home: gql`
+      {
+        home {
+          title
+          heroTitle
+          heroBlurb
+          heroImage {
+            url
+          }
+          slug
+        },
+      }
+    `,
+    allCurators: gql`
+      {
+        allCurators(filter: { mainCurator: { eq: true } }) {
+          name
+          blurb
+          image {
+            url
+            alt
+          }
+          slug
+          id
+        }
+      }
+    `
   },
   data() {
     return {

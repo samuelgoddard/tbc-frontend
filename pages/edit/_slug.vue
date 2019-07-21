@@ -1,25 +1,13 @@
 <template>
   <div>
-    <div class="container">
-      <h2>Testing all posts</h2>
-      <ul>
-        <li
-          v-for="(post, index) in allPosts"
-          :key="post.id">
-
-          <nuxt-link :to="'/edit/' + post.slug">{{ post.title }}</nuxt-link>
-        </li>
-      </ul>
-    </div>
-
     <!-- First block start -->
     <div class="mb-12 md:mb-32 xl:mb-40">
       <div class="container">
         <div class="flex flex-wrap md:-mx-6">
           <div class="w-full md:w-1/3 md:px-6 mt-16 lg:mt-24">
             <div class="mb-12">
-              <h2 class="font-serif text-2xl">the edit</h2>
-              <p class="text-sm mb-0 pr-24 md:pr-6 lg:pr-24">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum placeat, deleniti amet nisi dolore non volupd.</p>
+              <h2 class="font-serif text-2xl">{{ post.title }}</h2>
+              <p class="text-sm mb-0 pr-24 md:pr-6 lg:pr-24">{{ post.blurb }}</p>
             </div>
 
             <h3 class="text-black text-base font-sans font-bold">choose a category&nbsp;&nbsp;-</h3>
@@ -88,16 +76,26 @@ export default {
     LazyImage
   },
   apollo: {
-    allPosts: gql`
-      {
-        allPosts {
+    post: {
+      query: gql`query Post($slug: String!){
+        post(filter: { slug: {
+          eq: $slug
+        } }) {
           title
           blurb
-          id
-          slug
         }
-      }
-    `
+      }`,
+      prefetch({ route }) { 
+        return {
+          slug: route.params.slug 
+        }
+      },
+      variables() {
+        return {
+          slug: this.$route.params.slug
+        };
+      },
+    }
   },
   data() {
     return {

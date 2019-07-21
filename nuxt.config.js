@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   mode: 'universal',
   head: {
@@ -24,6 +26,8 @@ export default {
     '@nuxtjs/axios',
     '@ax2/lozad-module',
     'nuxt-purgecss',
+    '@nuxtjs/apollo',
+    '@nuxtjs/dotenv',
   ],
   build: {
     postcss: {
@@ -39,6 +43,11 @@ export default {
   lozad: {
   },
   axios: {
+  },
+  apollo: {
+    clientConfigs: {
+      default: '~/apollo/config.js'
+    }
   },
   build: {
     postcss: {
