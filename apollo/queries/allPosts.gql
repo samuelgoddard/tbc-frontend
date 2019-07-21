@@ -1,0 +1,8 @@
+{ 
+  allPosts {
+    title
+    blurb
+    id
+    slug
+  }
+}

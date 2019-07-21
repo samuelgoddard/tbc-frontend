@@ -3,7 +3,7 @@
     <!-- Hero -->
     <div class="mb-12 md:mb-32 xl:mb-40">
       <div class="container">
-        <Hero :heroTitle="home.heroTitle" :heroBlurb="home.heroBlurb" :heroImage="home.heroImage.url"/>
+        <Hero :heroTitle="home.heroTitle" :heroBlurb="home.heroBlurb" :heroImage="home.heroImage.url" />
       </div>
     </div>
     <!-- End Hero -->
@@ -105,6 +105,9 @@ import Hero from '~/components/Hero.vue'
 import Teaser from '~/components/Teaser.vue'
 import LazyImage from '~/components/LazyImage.vue'
 
+import allCuratorsQuery from '~/apollo/queries/allCurators'
+import homeQuery from '~/apollo/queries/home'
+
 import gql from 'graphql-tag';
 
 export default {
@@ -114,34 +117,16 @@ export default {
     Teaser,
     LazyImage,
   },
-  apollo: {
-    home: gql`
-      {
-        home {
-          title
-          heroTitle
-          heroBlurb
-          heroImage {
-            url
-          }
-          slug
-        },
-      }
-    `,
-    allCurators: gql`
-      {
-        allCurators(filter: { mainCurator: { eq: true } }) {
-          name
-          blurb
-          image {
-            url
-            alt
-          }
-          slug
-          id
-        }
-      }
-    `
+  async asyncData({ app }){
+    const home = await app.apolloProvider.defaultClient.query({
+      query: homeQuery,
+    }).then(({data}) => data && data.home)
+
+    const allCurators = await app.apolloProvider.defaultClient.query({
+      query: allCuratorsQuery,
+    }).then(({data}) => data && data.allCurators)
+    
+    return { home, allCurators }
   },
   data() {
     return {

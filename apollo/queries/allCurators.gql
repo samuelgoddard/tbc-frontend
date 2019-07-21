@@ -1,0 +1,12 @@
+{
+  allCurators(filter: { mainCurator: { eq: true } }) {
+    name
+    blurb
+    image {
+      url
+      alt
+    }
+    slug
+    id
+  }
+}

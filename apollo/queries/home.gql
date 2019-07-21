@@ -1,0 +1,11 @@
+{
+  home {
+    title
+    heroTitle
+    heroImage {
+      url
+      alt
+    }
+    heroBlurb
+  }
+}

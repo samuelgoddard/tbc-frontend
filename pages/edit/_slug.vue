@@ -67,6 +67,8 @@
 import Teaser from '~/components/Teaser.vue'
 import LazyImage from '~/components/LazyImage.vue'
 
+import postQuery from '~/apollo/queries/post'
+
 import gql from 'graphql-tag';
 
 export default {
@@ -75,27 +77,13 @@ export default {
     Teaser,
     LazyImage
   },
-  apollo: {
-    post: {
-      query: gql`query Post($slug: String!){
-        post(filter: { slug: {
-          eq: $slug
-        } }) {
-          title
-          blurb
-        }
-      }`,
-      prefetch({ route }) { 
-        return {
-          slug: route.params.slug 
-        }
-      },
-      variables() {
-        return {
-          slug: this.$route.params.slug
-        };
-      },
-    }
+  async asyncData({ app, params }){
+    const post = await app.apolloProvider.defaultClient.query({
+      query: postQuery,
+      variables:{slug: params.slug}
+    }).then(({data}) => data && data.post)
+    
+    return { post }
   },
   data() {
     return {

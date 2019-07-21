@@ -1,17 +1,5 @@
 <template>
   <div>
-    <div class="container">
-      <h2>Testing all posts</h2>
-      <ul>
-        <li
-          v-for="(post, index) in allPosts"
-          :key="post.id">
-
-          <nuxt-link :to="'/edit/' + post.slug">{{ post.title }}</nuxt-link>
-        </li>
-      </ul>
-    </div>
-
     <!-- First block start -->
     <div class="mb-12 md:mb-32 xl:mb-40">
       <div class="container">
@@ -19,7 +7,17 @@
           <div class="w-full md:w-1/3 md:px-6 mt-16 lg:mt-24">
             <div class="mb-12">
               <h2 class="font-serif text-2xl">the edit</h2>
-              <p class="text-sm mb-0 pr-24 md:pr-6 lg:pr-24">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum placeat, deleniti amet nisi dolore non volupd.</p>
+              <p class="text-sm pr-24 md:pr-6 lg:pr-24">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum placeat, deleniti amet nisi dolore non volupd.</p>
+
+              <h2>@DEBUG testing posts here</h2>
+              <ul>
+                <li
+                  v-for="(post, index) in allPosts"
+                  :key="post.id">
+
+                  <nuxt-link :to="'/edit/' + post.slug">{{ post.title }}</nuxt-link>
+                </li>
+              </ul>
             </div>
 
             <h3 class="text-black text-base font-sans font-bold">choose a category&nbsp;&nbsp;-</h3>
@@ -79,6 +77,8 @@
 import Teaser from '~/components/Teaser.vue'
 import LazyImage from '~/components/LazyImage.vue'
 
+import allPostsQuery from '~/apollo/queries/allPosts'
+
 import gql from 'graphql-tag';
 
 export default {
@@ -87,17 +87,12 @@ export default {
     Teaser,
     LazyImage
   },
-  apollo: {
-    allPosts: gql`
-      {
-        allPosts {
-          title
-          blurb
-          id
-          slug
-        }
-      }
-    `
+  async asyncData({ app }){
+    const allPosts = await app.apolloProvider.defaultClient.query({
+      query: allPostsQuery,
+    }).then(({data}) => data && data.allPosts)
+    
+    return { allPosts }
   },
   data() {
     return {
