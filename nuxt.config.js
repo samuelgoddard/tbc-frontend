@@ -11,7 +11,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  loading: { color: '#fff' },
+  loading: { color: '#e5d1d1' },
   css: [
     '~/assets/css/main.css'
   ],
@@ -19,7 +19,21 @@ export default {
   ],
   modules: [
     '@nuxtjs/axios',
+    '@ax2/lozad-module',
+    'nuxt-purgecss',
   ],
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: 'tailwind.config.js'
+      }
+    }
+  },
+  purgeCSS: {
+    mode: 'postcss'
+  },
+  lozad: {
+  },
   axios: {
   },
   build: {

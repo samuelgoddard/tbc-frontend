@@ -17,7 +17,17 @@
         </div>
       </div>
       
-      <img src="https://placedog.net/1200/1200" alt="Placeholder Image" class="border-l-12 border-pink" />
+      <lazy-image lowSrc="https://placedog.net/100/100" src="https://placedog.net/1200/1200" alt="Placeholder Image" classList="border-l-12 border-pink" />
     </div>
   </div>
 </template>
+
+<script>
+import LazyImage from '~/components/LazyImage.vue'
+
+export default {
+  components: {
+    LazyImage,
+  }
+}
+</script>

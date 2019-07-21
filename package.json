@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@ax2/lozad-module": "^0.1.2",
     "@nuxtjs/axios": "^5.3.6",
     "nuxt": "^2.0.0"
   },
@@ -18,9 +19,11 @@
     "autoprefixer": "^8.6.4",
     "cross-env": "^5.2.0",
     "nodemon": "^1.18.9",
+    "nuxt-purgecss": "^0.2.1",
     "postcss-import": "^12.0.1",
     "postcss-import-resolver": "^1.2.3",
     "postcss-nested": "^4.1.2",
-    "tailwindcss": "^1.0.0"
+    "tailwindcss": "^1.0.0",
+    "tailwindcss-transition": "^1.0.5"
   }
 }

@@ -58,7 +58,7 @@
         <div class="w-full md:w-11/12 lg:w-9/12 mx-auto">
           <div class="flex flex-wrap md:-mx-8 items-center">
             <div class="w-full md:w-3/5 md:px-8 mb-6 md:mb-0">
-              <img src="https://placedog.net/900/1250" alt="Placeholder Image" class="border-l-12 border-pink w-full" />
+              <lazy-image classList="border-l-12 border-pink w-full" />
             </div>
             
             <div class="w-full md:w-2/5 md:px-8">
@@ -90,7 +90,7 @@
               </div>
             </div>
             <div v-else>
-              <img :src="image.url" alt="Instagram Image" class="w-full" />
+              <lazy-image :src="image.url" alt="Instagram Image" />
             </div>
           </div>
         </div>
@@ -103,11 +103,14 @@
 <script>
 import Hero from '~/components/Hero.vue'
 import Teaser from '~/components/Teaser.vue'
+import LazyImage from '~/components/LazyImage.vue'
 
 export default {
+  transition: 'fade',
   components: {
     Hero,
     Teaser,
+    LazyImage,
   },
   data() {
     return {
@@ -122,6 +125,9 @@ export default {
         { url: 'https://placedog.net/730/730', id: 8 }
       ]
     }
+  },
+  mounted () {
+    this.$lozad.observe();
   }
 }
 </script>

@@ -8,13 +8,13 @@
       <div class="w-full sm:flex-1">
         <div class="flex flex-wrap">
           <div class="sm:ml-8">
-            <p class="text-black text-sm leading-snug">
+            <p class="text-black text-sm leading-snug mb-0">
               sign up to the <a href="#" class="text-black underline">newsletter</a><br/>
               we use <a href="#" class="text-black underline">cookies</a>
             </p>
           </div>
           <div class="ml-auto text-right">
-            <p class="text-black text-sm leading-snug">
+            <p class="text-black text-sm leading-snug mb-0">
               <a href="#" class="text-black underline block">instagram</a>
               <a href="#" class="text-black underline block">pinterest</a>
             </p>

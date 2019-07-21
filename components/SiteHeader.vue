@@ -1,7 +1,7 @@
 <template>
   <div class="container py-10">
     <div class="flex flex-wrap items-center">
-      <logo classList="text-beige" />
+      <logo classList="text-beige hover:text-dark-blue-grey focus:text-dark-blue-grey transition" />
       <div class="flex-1">
         <div class="flex justify-end sm:justify-center">
           <site-nav />
