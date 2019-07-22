@@ -117,16 +117,24 @@ export default {
     Teaser,
     LazyImage,
   },
-  async asyncData({ app }){
-    const home = await app.apolloProvider.defaultClient.query({
-      query: homeQuery,
-    }).then(({data}) => data && data.home)
+  // async asyncData({ app }){
+  //   const home = await app.apolloProvider.defaultClient.query({
+  //     query: homeQuery,
+  //   }).then(({data}) => data && data.home)
 
-    const allCurators = await app.apolloProvider.defaultClient.query({
-      query: allCuratorsQuery,
-    }).then(({data}) => data && data.allCurators)
+  //   const allCurators = await app.apolloProvider.defaultClient.query({
+  //     query: allCuratorsQuery,
+  //   }).then(({data}) => data && data.allCurators)
     
-    return { home, allCurators }
+  //   return { home, allCurators }
+  // },
+  apollo: {
+    home: {
+      query: homeQuery,
+    },
+    allCurators: {
+      query: allCuratorsQuery,
+    },
   },
   data() {
     return {

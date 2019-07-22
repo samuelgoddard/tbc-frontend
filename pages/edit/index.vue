@@ -87,12 +87,18 @@ export default {
     Teaser,
     LazyImage
   },
-  async asyncData({ app }){
-    const allPosts = await app.apolloProvider.defaultClient.query({
-      query: allPostsQuery,
-    }).then(({data}) => data && data.allPosts)
+  // async asyncData({ app }){
+  //   const allPosts = await app.apolloProvider.defaultClient.query({
+  //     query: allPostsQuery,
+  //   }).then(({data}) => data && data.allPosts)
     
-    return { allPosts }
+  //   return { allPosts }
+  // },
+
+  apollo: {
+    allPosts: {
+      query: allPostsQuery,
+    }
   },
   data() {
     return {
