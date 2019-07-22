@@ -1,3 +1,8 @@
+import fetch from 'node-fetch';
+import { execute, makePromise } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
+import gql from 'graphql-tag';
+
 require('dotenv').config()
 
 export default {
@@ -48,10 +53,44 @@ export default {
   axios: {
   },
   apollo: {
+    includeNodeModules: true,
     clientConfigs: {
       default: '~/apollo/config.js'
     }
   },
+
+  generate: {
+    routes: function(callback) {
+      const uri = 'https://graphql.datocms.com';
+      const link = new createHttpLink({ uri: uri, fetch: fetch });
+      const operation = {
+      query: gql`
+        {
+          allPosts {
+            slug
+          }
+        }`,
+        context: {
+          headers: {
+            authorization: `Bearer ${ process.env.DATO_KEY }`
+          }
+        }
+      };
+
+    makePromise(execute(link, operation))
+      .then(data => {
+        // Build the routes from the posts
+        const postRoutes = data.data.allPosts.map(item => {
+          return { route: `/edit/${item.slug}`, payload: { }};
+        });
+
+        // Register the routes
+        callback(null, postRoutes);
+      })
+      .catch(error => console.log(`received error ${error}`));
+    }
+  },
+
   build: {
     postcss: {
       plugins: {
