@@ -9,7 +9,7 @@ export default {
   env: {
     DATO_KEY: process.env.DATO_KEY,
   },
-  mode: 'universal',
+  mode: 'generated',
   head: {
     title: process.env.npm_package_name || '',
     htmlAttrs: {
@@ -35,7 +35,7 @@ export default {
     '@ax2/lozad-module',
     'nuxt-purgecss',
     '@nuxtjs/apollo',
-    '@nuxtjs/dotenv',
+    '@nuxtjs/dotenv'
   ],
   build: {
     postcss: {
